@@ -1,20 +1,17 @@
 console.log("Welcome to Manuel's Math Game");
 
-const quiz = [];
+const ops = ['+', '*', '-'];
 
-for (let i = 1; i <= 10; i++) {
-    for (let j = 0; j <= 10; j++) {
-        quiz.push({ op: '+', i, j });
-        quiz.push({ op: '*', i, j });
-        if (i >= j) {
-            quiz.push({ op: '-', i, j });
-        }
-    }
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 while (true) {
-    const randomIndex = Math.floor(Math.random() * quiz.length);
-    const { op, i, j } = quiz[randomIndex];
+    const i = getRandomInt(1, 10);
+    const j = getRandomInt(0, 10);
+    const op = ops[getRandomInt(0, i >= j ? 2 : 1)];
     const expr = `${i} ${op} ${j}`;
     const input = prompt(`What is ${expr} ?`);
     const answer = op === '+' ? i + j : op === '-' ? i - j : i * j;
