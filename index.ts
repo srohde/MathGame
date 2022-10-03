@@ -2,32 +2,28 @@ console.log("Welcome to Manuel's Math Game");
 
 const quiz = [];
 
-for(let i=1; i <= 10; i++){
+for (let i = 1; i <= 10; i++) {
     for (let j = 0; j <= 10; j++) {
-        let qAdd = i + ' + ' + j;
-        let qMul = i + ' * ' + j;
-        if(i >= j){
-            let qSub = i + ' - ' + j;
-            quiz.push(qSub);
+        quiz.push({ op: '+', i, j });
+        quiz.push({ op: '*', i, j });
+        if (i >= j) {
+            quiz.push({ op: '-', i, j });
         }
-        
-        quiz.push(qAdd);
-        quiz.push(qMul);
     }
-    
 }
 
-while(true){
-    const random = Math.floor(Math.random() * quiz.length);
-    const randomQuiz = quiz[random];
-    const input = prompt('What is ' + randomQuiz + ' =');
-    const answer =  eval(randomQuiz);
-    const result = answer == input;
+while (true) {
+    const randomIndex = Math.floor(Math.random() * quiz.length);
+    const { op, i, j } = quiz[randomIndex];
+    const expr = `${i} ${op} ${j}`;
+    const input = prompt(`What is ${expr} ?`);
+    const answer = op === '+' ? i + j : op === '-' ? i - j : i * j;
+    const isCorrect = answer == input;
 
-    if(result == true){
-        console.log('Congrats, you got it! ' + randomQuiz + ' = ' + input);
-    }else{
-        console.log('That sus. ' + randomQuiz + ' = ' + answer);
+    if (isCorrect) {
+        console.log(`Congrats, you got it! ${expr} = ${input}`);
+    } else {
+        console.log(`That sus. ${expr} = ${answer}`);
     }
     console.log('\n');
 }
