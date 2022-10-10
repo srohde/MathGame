@@ -14,7 +14,22 @@ while (true) {
     const op = ops[getRandomInt(0, i >= j ? 2 : 1)];
     const expr = `${i} ${op} ${j}`;
     const input = prompt(`What is ${expr} ?`);
-    const answer = op === '+' ? i + j : op === '-' ? i - j : i * j;
+    
+    var answer = '';
+    switch (op) {
+        case '+':
+            answer = i + j;
+            break;
+        case '-':
+            answer = i - j;
+            break;
+        case '*':
+            answer = i * j;
+            break;
+        default:
+            break;
+    }
+
     const isCorrect = answer == input;
 
     if (isCorrect) {
